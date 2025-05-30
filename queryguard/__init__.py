@@ -10,29 +10,59 @@ before a query is sent to a primary Large Language Model (LLM).
 Designed to be lightweight, fast, and highly configurable through external YAML rule files.
 """
 
-# Import key functions/classes to make them available at the package level
-# e.g., from queryguard import evaluate_input_advanced, load_rules_from_yaml
+import logging
 
+# Import key functions/classes to make them available at the package level
 from .core import evaluate_input_advanced
 from .rule_loader import load_rules_from_yaml
-# Potentially import specific detection functions if they are meant to be directly usable
-# or if users might want to call them independently for specific checks.
-# For now, they are primarily used by the core engine via rule configuration.
 
-# Import utility functions if they are part of the public API
-# from .utils import normalize_text # Example, if needed publicly
-
-__version__ = "0.1.0"  # Updated to a more standard initial dev version
+__version__ = "0.1.0" # Will be updated as features are added/fixed
 
 # Define what gets imported with 'from queryguard import *'
-# It's good practice to define __all__ if you use 'import *',
-# though direct imports are generally preferred for clarity.
 __all__ = [
     'evaluate_input_advanced',
     'load_rules_from_yaml',
+    'setup_logging',
     '__version__'
-    # Add other public API elements here if any
 ]
 
-# Optional: A log message to confirm package initialization during development
-# print(f"QueryGuard package (version {__version__}) initialized.")
+# Set up a logger for the QueryGuard library
+# Following library best practices: https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
+_logger = logging.getLogger(__name__)
+_logger.addHandler(logging.NullHandler()) # Add a NullHandler to prevent "No handler found" warnings
+
+def setup_logging(level: int = logging.INFO, handler: Optional[logging.Handler] = None) -> None:
+    """
+    Set up logging for the QueryGuard library.
+
+    By default, QueryGuard does not output any logs. Call this function
+    in your application to enable QueryGuard's internal logging.
+
+    Args:
+        level (int): The logging level to set for QueryGuard's logger
+                     (e.g., logging.DEBUG, logging.INFO, logging.WARNING).
+                     Defaults to logging.INFO.
+        handler (Optional[logging.Handler]): The logging handler to use.
+                                             If None, a StreamHandler outputting
+                                             to sys.stderr will be created.
+                                             Defaults to None.
+    """
+    # Remove the NullHandler if it exists
+    for h in list(_logger.handlers): # Iterate over a copy
+        if isinstance(h, logging.NullHandler):
+            _logger.removeHandler(h)
+
+    if handler is None:
+        # Default to a StreamHandler to stderr if no handler is provided
+        handler = logging.StreamHandler()
+        # You might want a default formatter as well
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+
+    _logger.addHandler(handler)
+    _logger.setLevel(level)
+    _logger.info(f"QueryGuard logging configured at level {logging.getLevelName(level)}.")
+
+# Optional: A log message to confirm package initialization if logging is explicitly enabled by the app.
+# This will only show if the application calls setup_logging().
+_logger.debug(f"QueryGuard package (version {__version__}) initialized and logger ready.")
