@@ -95,3 +95,31 @@ else:
         else:
             print("  No rules triggered.")
     print("\n--- End of Evaluation ---")
+## Rule Configuration
+
+QueryGuard's detection capabilities are driven by rules defined in YAML files. These rules specify patterns, detection logic, and actions to take.
+
+* See `rules/default_ruleset.yaml` for the structure and examples of default rules.
+* Users can create their own rule files (see `rules/example_custom_rules.yaml`) to extend or customize QueryGuard's behavior.
+
+The structure of these rule files is critical and includes fields for:
+* `rule_id`, `rule_name`, `description`
+* `target_abuse_categories`, `severity`
+* `detection_logic` (specifying the `check_function` and its `parameters`)
+* `action_on_match`, `message_template`
+* Versioning, authorship, tags, and `test_cases`
+
+## Contributing
+
+This project is in its early stages. Contributions, feedback, and suggestions are highly welcome!
+(Details on contributing will be added to a `CONTRIBUTING.md` file.)
+
+To report issues or suggest features, please use the GitHub Issues page for this repository.
+
+## License
+
+QueryGuard is distributed under the MIT License. See the `LICENSE` file in this repository for details.
+
+---
+*QueryGuard - Developer: Igor Warzocha (alpha)*
+*Contact: igorwarzocha@gmail.com*
