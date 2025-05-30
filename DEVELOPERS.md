@@ -62,7 +62,7 @@ QueryGuard's dependencies are listed in `requirements.txt` (primarily `PyYAML` a
 You can install QueryGuard directly from its Git repository. Add the following line to your `requirements.txt` file:
 
 ```text
-git+[https://github.com/igorwarzocha/queryguard-library.git@main#egg=queryguard](https://github.com/igorwarzocha/queryguard-library.git@main#egg=queryguard)
+git+https://github.com/igorwarzocha/queryguard-library.git@main#egg=queryguard
 ```
 
 *(Note: Replace `@main` with a specific tag or commit hash for stable versions if available.)*
@@ -80,7 +80,7 @@ pip install -r requirements.txt
 If you are actively developing QueryGuard or need to debug its internals within a host application:
 1.  Clone the QueryGuard repository to your local machine:
     ```bash
-    git clone [https://github.com/igorwarzocha/queryguard-library.git](https://github.com/igorwarzocha/queryguard-library.git)
+    git clonehttps://github.com/igorwarzocha/queryguard-library.git
     cd queryguard-library
     ```
 2.  Ensure you are in your project's virtual environment.
