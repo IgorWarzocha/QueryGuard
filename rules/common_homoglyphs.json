@@ -1,17 +1,40 @@
 {
-  "map_name": "Common Latin Homoglyphs - Basic",
-  "version": "0.1",
-  "description": "A very basic map of common homoglyphs for Latin characters. For comprehensive detection, a more extensive map is needed.",
+  "map_name": "Common Latin Homoglyphs - Basic Example",
+  "version": "0.1.0",
+  "description": "A very basic and illustrative map of common homoglyphs for Latin characters. For comprehensive detection, a more extensive, curated map is essential.",
   "substitutions": {
-    "a": ["а", "α", "ä", "à", "á", "â", "ã"], // Cyrillic 'а', Greek 'α', etc.
-    "e": ["е", "ё", "є", "ē", "é", "ê", "ë"], // Cyrillic 'е', 'ё', 'є'
-    "i": ["і", "ї", "í", "î", "ï"],         // Cyrillic 'і', 'ї'
-    "o": ["о", "ο", "ö", "ò", "ó", "ô", "õ"], // Cyrillic 'о', Greek 'ο'
-    "p": ["р", "ρ"],                         // Cyrillic 'р', Greek 'ρ'
-    "s": ["ѕ", "ร"],                         // Cyrillic 'ѕ', Thai 'ร'
-    "c": ["с", "ċ"],                         // Cyrillic 'с'
-    "l": ["ӏ"],                             // Cyrillic 'ӏ' (palochka)
-    "x": ["х", "χ"]                          // Cyrillic 'х', Greek 'χ'
-    // ... and so on for other characters and more extensive lists
-  }
+    "a": ["а", "α", "ä", "à", "á", "â", "ã", "ą"],
+    "b": ["Ь", "в", "Б"],
+    "c": ["с", "ċ", "¢", "ς"],
+    "d": ["ԁ", "Ꮷ", "ԁ", "ð"],
+    "e": ["е", "ё", "є", "ē", "é", "ê", "ë", "ę"],
+    "f": ["ſ"],
+    "g": ["ġ", "ǥ"],
+    "h": ["һ", "н"],
+    "i": ["і", "ї", "í", "î", "ï", "į", "ı"],
+    "j": ["ј", "ĵ"],
+    "k": ["к", "κ"],
+    "l": ["ӏ", "ḷ", "ł"],
+    "m": ["м", "ṁ"],
+    "n": ["п", "ո", "ń"],
+    "o": ["о", "ο", "ö", "ò", "ó", "ô", "õ", "ø", "ǫ"],
+    "p": ["р", "ρ", "þ"],
+    "q": ["ԛ"],
+    "r": ["г", "ѓ", "ř"],
+    "s": ["ѕ", "ร", "ś", "š", "ș"],
+    "t": ["т", "τ", "ť", "ț"],
+    "u": ["υ", "ü", "ú", "û", "ù", "ų"],
+    "v": ["ν"],
+    "w": ["ѡ", "ա", "ẃ", "ŵ", "ẁ"],
+    "x": ["х", "χ", "ж"],
+    "y": ["у", "ү", "ý", "ÿ"],
+    "z": ["ź", "ż", "ž"],
+    "0": ["о", "Ο", "О"], 
+    "1": ["l", "ӏ", "І", "і"]
+  },
+  "notes": [
+    "This map is for illustrative purposes only and is not exhaustive.",
+    "Effectiveness depends on the normalization form used before comparison.",
+    "Consider context: 'l' vs '1' is common, but 'a' vs Cyrillic 'а' is more indicative of evasion in specific contexts."
+  ]
 }
