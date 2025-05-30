@@ -63,6 +63,10 @@ While QueryGuard itself is a component that needs to be integrated by a develope
 
 We aim to provide an accessible tool that helps make chatbots safer, more reliable, and more efficient, starting with this important first line of defense.
 
+## For Developers
+
+If you are a developer interested in the technical details of QueryGuard, how to contribute, or the specifics of its implementation, please see our comprehensive **[Developer Guide (DEVELOPERS.md)](DEVELOPERS.md)**.
+
 ---
 *QueryGuard - Lead Developer: Igor Warzocha*
 *Contact: igorwarzocha@gmail.com*
