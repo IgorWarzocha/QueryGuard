@@ -54,7 +54,7 @@ All of this happens very quickly before the main chatbot AI has to do any heavy 
 
 QueryGuard is currently an **alpha-stage software library for Python developers.** This means it's still in active development and is best suited for technical users or for chatbot owners to discuss with their developers.
 
-* **If you are a developer:** You can check out our main `README.md` file for technical details on installation and usage. The project is open-source, and you can find it on GitHub: [https://github.com/igorwarzocha/queryguard-library](https://github.com/igorwarzocha/queryguard-library)
+* **If you are a developer:** You can check out our main `README.md` file for technical details on installation and usage. The project is open-source, and you can find it on GitHub: [https://github.com/IgorWarzocha/QueryGuard](https://github.com/IgorWarzocha/QueryGuard)
 * **If you are a chatbot owner (non-technical):** The best approach is to talk to the developer or technical team who built or manages your chatbot. You can show them this page and the main QueryGuard project. They can evaluate if QueryGuard is a good fit for your system and how to integrate it.
 
 While QueryGuard itself is a component that needs to be integrated by a developer, the *principles* behind it – pre-filtering inputs, setting rules, and having a "guard" – are important for any chatbot's health and safety!
