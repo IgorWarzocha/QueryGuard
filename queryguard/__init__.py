@@ -11,12 +11,13 @@ Designed to be lightweight, fast, and highly configurable through external YAML 
 """
 
 import logging
+from typing import Optional # Import Optional for type hinting
 
 # Import key functions/classes to make them available at the package level
 from .core import evaluate_input_advanced
 from .rule_loader import load_rules_from_yaml
 
-__version__ = "0.1.0" # Will be updated as features are added/fixed
+__version__ = "0.1.1" # Assuming a patch version bump for the fix
 
 # Define what gets imported with 'from queryguard import *'
 __all__ = [
@@ -47,7 +48,7 @@ def setup_logging(level: int = logging.INFO, handler: Optional[logging.Handler] 
                                              to sys.stderr will be created.
                                              Defaults to None.
     """
-    # Remove the NullHandler if it exists
+    # Remove the NullHandler if it exists to avoid duplicate logs if setup_logging is called multiple times
     for h in list(_logger.handlers): # Iterate over a copy
         if isinstance(h, logging.NullHandler):
             _logger.removeHandler(h)
