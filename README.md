@@ -95,6 +95,7 @@ else:
         else:
             print("  No rules triggered.")
     print("\n--- End of Evaluation ---")
+```
 ## Rule Configuration
 
 QueryGuard's detection capabilities are driven by rules defined in YAML files. These rules specify patterns, detection logic, and actions to take.
