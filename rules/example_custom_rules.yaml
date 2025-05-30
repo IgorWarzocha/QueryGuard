@@ -1,93 +1,121 @@
 # rules/example_custom_rules.yaml
 
 # QueryGuard Example Custom Ruleset
-# Version: 1.0.0
-# Last Updated: 2025-05-30
+# Version: 1.1.0 # Updated version
+# Last Updated: 2025-05-30 # Updated date
 # Description: This file demonstrates how users can define their own rules
 #              for specific application needs, using QueryGuard's structure.
+#              These examples now use functional check_function names implemented
+#              in queryguard.detection_functions.
 
 rules:
   - rule_id: "CUSTOM-APP-001"
     rule_name: "BlockSpecificInternalProjectCodename"
-    description: "Blocks queries mentioning a sensitive internal project codename if not from an authorized context (contextual logic would be in core or wrapper)."
+    description: >
+      Blocks queries mentioning a sensitive internal project codename.
+      This demonstrates using the generic 'detect_substring_match' function
+      for simple keyword blocking. Contextual logic (e.g., allowing if from
+      an authorized user) would typically be handled by the application
+      wrapping QueryGuard, or by more advanced rule conditions if QueryGuard supports them.
     target_abuse_categories: ["DATA_LEAK_INTERNAL", "CONFIDENTIALITY"]
     severity: "HIGH"
     enabled: true
     detection_logic:
-      # This assumes a generic keyword matcher might be available or
-      # the user would create a custom function 'detect_specific_keywords_custom'.
-      # For now, let's assume a hypothetical function signature that QueryGuard could support.
-      check_function: "detect_substring_match" # Hypothetical generic function
+      # Uses the 'detect_substring_match' function now available in detection_functions.py
+      check_function: "detect_substring_match"
       parameters:
+        # substrings_to_match: A list of strings to search for within the input text.
         substrings_to_match:
           - "ProjectBlueHarvest"
           - "StardustInitiative"
-        case_sensitive: false
+        # case_sensitive: Determines if the substring matching should be case sensitive.
+        # Default for detect_substring_match is True if not specified.
+        case_sensitive: false # Example: make it case-insensitive for broader matching.
     action_on_match: "BLOCK"
     message_template: "Blocked: Query contains sensitive internal terms (Rule ID: {{rule_id}})."
-    version: "1.0"
-    author: "YourAppDevTeam" # Example author
-    last_updated: "2025-05-30T11:35:00Z"
-    tags: ["custom", "internal_project", "data_leak_prevention"]
+    version: "1.1" # Updated version
+    author: "YourAppDevTeam (Example)"
+    last_updated: "2025-05-30T00:00:00Z"
+    tags: ["custom", "internal_project", "data_leak_prevention", "substring_match"]
     test_cases:
       positive:
         - "Tell me everything about ProjectBlueHarvest plans."
-        - "What is the latest on StardustInitiative?"
+        - "What is the latest on stardustinitiative?" # Should match due to case_sensitive: false
+        - "Any news on ProjectBlueHarvest?"
       negative:
         - "What is the project about blue corn harvest methods?"
         - "I love watching stardust in the night sky."
+        - "projectblueharvest is not what I meant." # Might still match if tokenization isn't strict on boundaries, but substring check is literal.
 
   - rule_id: "CUSTOM-APP-002"
     rule_name: "FlagExcessiveQuestionMarksForSupportBot"
-    description: "Flags queries with an excessive number of question marks, which might indicate user frustration or a malformed query intended for a support bot."
+    description: >
+      Flags queries with an excessive number of question marks or a high punctuation ratio,
+      which might indicate user frustration or a malformed query intended for a support bot.
+      This uses the 'analyze_text_statistics' function.
     target_abuse_categories: ["USER_EXPERIENCE", "QUERY_MALFORMED"]
-    severity: "INFO" # Changed to INFO as it's more informational
+    severity: "INFO" # Changed to INFO as it's more informational, less of a security threat.
     enabled: true
     detection_logic:
-      check_function: "analyze_text_statistics" # Uses an existing detection function
+      check_function: "analyze_text_statistics"
       parameters:
-        # This implies analyze_text_statistics can be configured to check for
-        # repetition or high frequency of specific characters, or we'd enhance it.
-        # For this example, let's assume it checks 'char_repetition_config'
-        # or we'd need a more specific check_function.
-        # A simple way is a high ratio of punctuation.
+        # char_type_ratios_config allows specifying min/max ratios for different character types.
+        # Format: { char_type: [min_ratio_or_null, max_ratio_or_null] }
+        # Here, we check if the ratio of 'punctuation' characters exceeds 50% of the total characters.
         char_type_ratios_config:
-          punctuation: [null, 0.5] # Max 50% punctuation (example)
-        # Or, if analyze_text_statistics had a direct way to count specific chars:
+          punctuation: [null, 0.5] # Max 50% punctuation (0.0 to 1.0 scale).
+        # Alternative parameter for this rule, if analyze_text_statistics supported direct char counts:
         # specific_char_count_limits:
-        #   "?": [5, null] # Min 5 question marks
+        #   "?": [5, null] # Min 5 question marks (hypothetical, not current in analyze_text_statistics)
+        # Or, one could use 'char_repetition_threshold' if it's about repeated question marks, e.g., "?????"
+        # char_repetition_threshold: 5 # (This would catch '?????')
     action_on_match: "FLAG"
-    message_template: "Flagged: Query contains an unusual number of question marks or high punctuation ratio. Please review for clarity or user frustration (Rule ID: {{rule_id}})."
+    message_template: "Flagged: Query contains an unusual number of question marks or high punctuation ratio. Please review for clarity or user frustration (Rule ID: {{rule_id}}). Details: {{metrics.char_distribution.punctuation}} punctuation chars out of {{metrics.char_distribution.total}}."
     version: "1.0"
-    author: "YourAppDevTeam"
-    last_updated: "2025-05-30T11:35:00Z"
-    tags: ["custom", "ux", "support_bot_enhancement"]
+    author: "YourAppDevTeam (Example)"
+    last_updated: "2025-05-30T00:00:00Z"
+    tags: ["custom", "ux", "support_bot_enhancement", "text_statistics"]
     test_cases:
       positive:
-        - "My system is broken why is it not working?????????? Help me NOW!!!!!!!!!" # High punctuation
+        - "My system is broken why is it not working?????????? Help me NOW!!!!!!!!!" # High punctuation ratio
+        - "What?!?! Is this broken?!?!" # Also high punctuation
       negative:
-        - "What is happening? Is this a bug??" # Moderate punctuation
+        - "What is happening? Is this a bug??" # Moderate punctuation, likely below 0.5 ratio
+        - "A simple question."
 
   - rule_id: "CUSTOM-API-001"
     rule_name: "BlockKnownBadApiKeyPattern"
-    description: "Blocks input that appears to contain a known bad API key pattern specific to this application."
+    description: >
+      Blocks input that appears to contain a known bad API key pattern specific to this application.
+      This demonstrates using the generic 'detect_regex_match' function.
     target_abuse_categories: ["SECURITY", "API_KEY_LEAK"]
     severity: "CRITICAL"
     enabled: true
     detection_logic:
-      check_function: "detect_regex_match" # Hypothetical generic regex function
+      # Uses the 'detect_regex_match' function now available in detection_functions.py
+      check_function: "detect_regex_match"
       parameters:
-        regex_pattern: "sk_live_[a-zA-Z0-9]{24,40}" # Example regex for a common API key prefix
+        # regex_pattern: The regular expression to search for in the input text.
+        # This example looks for a common pattern for Stripe-like API keys.
+        # IMPORTANT: Craft regex patterns carefully to avoid excessive computation (ReDoS)
+        # and to accurately target only the desired patterns.
+        regex_pattern: "sk_live_[a-zA-Z0-9]{24,40}" # Example regex
+        # case_sensitive: Determines if the regex matching is case sensitive.
+        # For detect_regex_match, if false, it uses the re.IGNORECASE flag.
+        # Default for detect_regex_match is True if not specified.
         case_sensitive: true
     action_on_match: "BLOCK"
     message_template: "Blocked: Input appears to contain a sensitive API key pattern (Rule ID: {{rule_id}})."
-    version: "1.0"
-    author: "YourAppSecTeam"
-    last_updated: "2025-05-30T11:35:00Z"
-    tags: ["custom", "api_key", "security_critical"]
+    version: "1.1" # Updated version
+    author: "YourAppSecTeam (Example)"
+    last_updated: "2025-05-30T00:00:00Z"
+    tags: ["custom", "api_key", "security_critical", "regex_match"]
     test_cases:
       positive:
         - "My API key is sk_live_abcdefghijklmnopqrstuvwxyz1234567890"
+        - "Found an old key: sk_live_0987654321ZYXWVUTSRQPONMLKJIHGFEDCBA some other text"
       negative:
         - "The sky is blue."
-        - "sk_test_abcdefghijklmnop" # Different prefix or shorter length
+        - "sk_test_abcdefghijklmnop" # Different prefix
+        - "sk_live_shortkey123" # Shorter than 24 alphanumeric chars after prefix
+        - "This is not an API key: sk_live_ but it is incomplete." # Fails length
