@@ -1,6 +1,8 @@
-# Dependencies for development and testing
-pytest>=6.0     # For running tests
-# pytest-cov>=2.0 # For test coverage (optional)
-# flake8>=3.0     # For linting (optional)
-# black>=20.0     # For code formatting (optional)
-# mypy>=0.900     # For static type checking (optional)
+# Dependencies for development and testing of QueryGuard
+pytest>=6.0     # For running unit and integration tests
+
+# Optional, but highly recommended for development:
+# pytest-cov>=2.0 # For generating test coverage reports
+# flake8>=3.0     # For linting Python code (PEP 8 and error checking)
+# black>=20.0     # For opinionated, consistent code formatting
+# mypy>=0.900     # For static type checking
