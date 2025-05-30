@@ -12,6 +12,8 @@ This library is being developed based on insights from research into LLM vulnera
 
 **QueryGuard is currently in the early alpha stage of development.** The API is subject to change, and the feature set is still being actively defined and implemented. The code provided is for conceptual and prototyping purposes. Functional but requires thorough testing and refinement.
 
+For a detailed list of planned enhancements, ongoing tasks, and areas for future development, please see our **[Project TODO List (TODO.md)](TODO.md)**. This roadmap outlines the steps towards a more robust and feature-complete library.
+
 ## Key Features (Planned & In Development)
 
 * **Rule-Based Detection:** Utilizes YAML-configurable rules for pattern matching (keywords, regex, N-grams, statistical anomalies).
