@@ -3,10 +3,10 @@
 Are you frustrated because your helpful chatbot is:
 
 * **Going Off-Topic?** Answering questions it shouldn't, or getting sidetracked by users?
-* **Being Tricked or Manipulated?** Users making it say or do silly, inappropriate, or unintended things? [cite: 38, 80]
-* **Revealing Information It Shouldn't?** Accidentally leaking details about its setup or even parts of the documents it's supposed to use? [cite: 125]
-* **Wasting Resources?** Users submitting overly long, complex, or repetitive questions that drive up your chatbot's running costs (especially if you pay per message/token)? [cite: 109, 110]
-* **Exposing a "System Prompt" or "Instructions"?** Users trying to figure out its core programming? [cite: 125]
+* **Being Tricked or Manipulated?** Users making it say or do silly, inappropriate, or unintended things?
+* **Revealing Information It Shouldn't?** Accidentally leaking details about its setup or even parts of the documents it's supposed to use?
+* **Wasting Resources?** Users submitting overly long, complex, or repetitive questions that drive up your chatbot's running costs (especially if you pay per message/token)?
+* **Exposing a "System Prompt" or "Instructions"?** Users trying to figure out its core programming?
 * **Just generally being abused by "cheeky" users or bad actors?**
 
 If any of this sounds familiar, you're not alone! As chatbots become more common, people are finding all sorts of ways to misuse them. This can make your chatbot less effective, less safe, and more expensive.
@@ -22,9 +22,9 @@ QueryGuard is like a smart, friendly security guard for your chatbot. It's a sof
 By adding QueryGuard (or a similar system) to your chatbot setup, you can:
 
 * ✅ **Keep Your Chatbot Focused:** Help prevent it from getting sidetracked by irrelevant or out-of-scope questions. This means it spends more time on what it's *supposed* to be doing.
-* 🛡️ **Protect Against Common Tricks:** Make it harder for users to directly "jailbreak" or bypass your chatbot's primary instructions[cite: 38, 64].
-* 💰 **Reduce Wasted Costs:** Filter out queries designed to be overly long, repetitive, or computationally intensive, potentially saving you money on API calls to the main LLM[cite: 109, 117].
-* 🔒 **Enhance Basic Security:** Provide an initial barrier against users trying to extract sensitive information (like its system prompt) or make it perform unintended tasks. [cite: 125, 133]
+* 🛡️ **Protect Against Common Tricks:** Make it harder for users to directly "jailbreak" or bypass your chatbot's primary instructions.
+* 💰 **Reduce Wasted Costs:** Filter out queries designed to be overly long, repetitive, or computationally intensive, potentially saving you money on API calls to the main LLM.
+* 🔒 **Enhance Basic Security:** Provide an initial barrier against users trying to extract sensitive information (like its system prompt) or make it perform unintended tasks.
 * 🛠️ **Handle Known Gaps More Gracefully:** (Planned Feature) Allow for pre-defined responses to common problematic queries, so your chatbot doesn't just say "I don't know" to things it's not meant to answer.
 * 😌 **Give You More Peace of Mind:** Know that an initial check is happening to catch common forms of misuse.
 
@@ -33,8 +33,8 @@ By adding QueryGuard (or a similar system) to your chatbot setup, you can:
 QueryGuard works by looking at the user's message before your main chatbot AI sees it. It uses a set of configurable "rules" – like a checklist – to spot common problematic patterns:
 
 * It can look for specific **keywords or phrases** that often signal trouble (e.g., "ignore your instructions").
-* It can spot **unusual formatting or hidden characters** that people use to try and trick AI[cite: 52, 53].
-* It can identify queries that are **excessively long or repetitive**[cite: 110].
+* It can spot **unusual formatting or hidden characters** that people use to try and trick AI.
+* It can identify queries that are **excessively long or repetitive**.
 
 If QueryGuard finds a problem based on these rules, it can:
 
