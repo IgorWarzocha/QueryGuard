@@ -1,0 +1,7 @@
+# Core dependencies for QueryGuard
+PyYAML>=5.0  # For loading YAML rule files
+# unicodedata2>=13.0.0 # Recommended for robust Unicode normalization, esp. on older Python
+                     # Python's built-in unicodedata is often sufficient on modern Python 3.
+                     # Let's keep this commented for now and use built-in unicodedata first.
+# python-Levenshtein>=0.12.0 # Or another fuzzy matching library like thefuzz
+                             # if we implement fuzzy matching in detection functions

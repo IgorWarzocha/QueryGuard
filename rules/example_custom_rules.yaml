@@ -1,0 +1,58 @@
+# rules/example_custom_rules.yaml
+
+# QueryGuard Example Custom Ruleset
+# Description: This file demonstrates how users can define their own rules.
+
+rules:
+  - rule_id: "CUSTOM-001"
+    rule_name: "BlockSpecificInternalProjectCodename"
+    description: "Blocks queries mentioning a sensitive internal project codename if the user is not on an allowlist (illustrative)."
+    target_abuse_categories: ["DATA_LEAK_INTERNAL"]
+    severity: "HIGH"
+    enabled: true
+    detection_logic:
+      # This assumes a hypothetical custom function or a generic one that takes keywords
+      check_function: "detect_keyword_match" # A generic keyword matcher
+      parameters:
+        keywords: ["ProjectBlueHarvest", "ProjectStardust"]
+        case_sensitive: false
+        # Contextual parameter example (core engine would need to support passing this)
+        # required_context: {"user_group": "internal_research_team_allowlist"}
+    action_on_match: "BLOCK"
+    message_template: "Blocked: Query contains sensitive internal terms not permitted for your access level (Rule ID: {{rule_id}})."
+    version: "1.0"
+    author: "MyAppDevTeam"
+    last_updated: "2025-05-30T10:30:00Z"
+    tags: ["custom", "internal", "data_leak"]
+    test_cases:
+      positive:
+        - "Tell me everything about ProjectBlueHarvest."
+        - "What is the status of projectstardust?"
+      negative:
+        - "What is the project about blue corn harvest?"
+        - "I love watching stardust."
+
+  - rule_id: "CUSTOM-002"
+    rule_name: "FlagExcessiveQuestionMarksForSupportBot"
+    description: "Flags queries with an excessive number of question marks, which might indicate user frustration or a malformed query for a support bot."
+    target_abuse_categories: ["USER_EXPERIENCE", "POTENTIAL_MALFORMED_QUERY"]
+    severity: "LOW"
+    enabled: true
+    detection_logic:
+      check_function: "analyze_text_statistics" # Using one of our defined functions
+      parameters:
+        # This implies analyze_text_statistics can check for specific char counts
+        # Or we'd have a more specific function like "check_char_repetition_or_count"
+        char_to_count: "?"
+        min_count_for_flag: 5 
+    action_on_match: "FLAG" # Just flag, don't block
+    message_template: "Flagged: Query contains an unusual number of question marks. Please review for clarity or user frustration (Rule ID: {{rule_id}})."
+    version: "1.0"
+    author: "MyAppDevTeam"
+    last_updated: "2025-05-30T10:30:00Z"
+    tags: ["custom", "ux", "support_bot"]
+    test_cases:
+      positive:
+        - "My system is broken why is it not working??????????"
+      negative:
+        - "What is happening??"

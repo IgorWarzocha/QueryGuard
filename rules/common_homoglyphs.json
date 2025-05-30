@@ -1,0 +1,17 @@
+{
+  "map_name": "Common Latin Homoglyphs - Basic",
+  "version": "0.1",
+  "description": "A very basic map of common homoglyphs for Latin characters. For comprehensive detection, a more extensive map is needed.",
+  "substitutions": {
+    "a": ["а", "α", "ä", "à", "á", "â", "ã"], // Cyrillic 'а', Greek 'α', etc.
+    "e": ["е", "ё", "є", "ē", "é", "ê", "ë"], // Cyrillic 'е', 'ё', 'є'
+    "i": ["і", "ї", "í", "î", "ï"],         // Cyrillic 'і', 'ї'
+    "o": ["о", "ο", "ö", "ò", "ó", "ô", "õ"], // Cyrillic 'о', Greek 'ο'
+    "p": ["р", "ρ"],                         // Cyrillic 'р', Greek 'ρ'
+    "s": ["ѕ", "ร"],                         // Cyrillic 'ѕ', Thai 'ร'
+    "c": ["с", "ċ"],                         // Cyrillic 'с'
+    "l": ["ӏ"],                             // Cyrillic 'ӏ' (palochka)
+    "x": ["х", "χ"]                          // Cyrillic 'х', Greek 'χ'
+    // ... and so on for other characters and more extensive lists
+  }
+}

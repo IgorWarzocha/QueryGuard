@@ -1,0 +1,6 @@
+# Dependencies for development and testing
+pytest>=6.0     # For running tests
+# pytest-cov>=2.0 # For test coverage (optional)
+# flake8>=3.0     # For linting (optional)
+# black>=20.0     # For code formatting (optional)
+# mypy>=0.900     # For static type checking (optional)
